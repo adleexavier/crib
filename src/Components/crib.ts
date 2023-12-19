@@ -6,27 +6,23 @@ import {
   HemisphericLight,
   Vector3,
   UniversalCamera,
-  Mesh,
-  PointLight,
   GlowLayer,
   DirectionalLight,
-  HDRCubeTexture,
   Color4,
-  CubeTexture,
 } from "@babylonjs/core";
 import "@babylonjs/loaders";
 
-import { setScene, setNavManager, setCamManager } from "./metaGlobal";
+import { setScene, setCamManager } from "./metaGlobal";
 
 import { Music } from "./metaComponents/music";
-import { NavMeshManager } from "./metaComponents/navMesh";
+// import { NavMeshManager } from "./metaComponents/navMesh";
 import { CameraManager } from "./metaComponents/camera";
 export class myCrib {
   scene: Scene;
   engine: Engine;
   camera!: UniversalCamera;
   cameraManager = {} as CameraManager;
-  navMeshManager = {} as NavMeshManager;
+  // navMeshManager = {} as NavMeshManager;
 
   //*********CONSTRUCTOR************/
   constructor(private canvas: HTMLCanvasElement) {
@@ -58,10 +54,10 @@ export class myCrib {
     );
     hemiLight.intensity = 1;
 
-    this.canvas.addEventListener("contextmenu", (e) => {
+    this.canvas.addEventListener("contextmenu", () => {
       this.engine.enterPointerlock();
     });
-    this.canvas.addEventListener("dblclick", (e) => {
+    this.canvas.addEventListener("dblclick", () => {
       this.engine.exitPointerlock();
     });
 
