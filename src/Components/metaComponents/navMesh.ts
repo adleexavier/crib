@@ -40,10 +40,12 @@ import {
   
     async init() {
       const recastist = await this.importRecastAlgorithm();
+      console.log(recastist,"Recast")
       this.navigationPlugin = new RecastJSPlugin(recastist);
     }
     async importRecastAlgorithm() {
       return await Recast();
+
     }
     createNavMesh(meshes: Mesh[]) {
       this.navigationPlugin.createNavMesh(meshes, this.parameters);

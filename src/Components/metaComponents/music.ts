@@ -19,6 +19,7 @@ export class Music {
       maxDistance: 100,
       spatialSound: true,
     });
+    this.music.play();
   }
   soundConfig(configData: configSound) {
     this.music.setPosition(configData.position);

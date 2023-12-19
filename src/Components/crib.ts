@@ -33,6 +33,8 @@ import { CameraManager } from "./metaComponents/camera";
     ) {
       this.engine = new Engine(this.canvas, true)
       this.scene = this.createScene();
+      this.scene.gravity = new Vector3(0,-9.81/30,0);
+      this.scene.collisionsEnabled = true;
       setScene(this.scene);
       this.cloneConstructor();
     }
@@ -74,10 +76,10 @@ import { CameraManager } from "./metaComponents/camera";
        * set music configuration
        */
       cribMusic.soundConfig({
-        position: new Vector3(0, 0, 3),
+        position: new Vector3(42, 2,44.4),
         distanceModal: "exponential",
         coneAngle: Math.PI / 2,
-        volume: 0.012,
+        volume: 0.1,
       });
   
       return scene;
@@ -92,18 +94,22 @@ import { CameraManager } from "./metaComponents/camera";
         `crib2.glb`,
         this.scene
       );
+      meshes.map(mesh=>{
+       if (mesh.name.startsWith("floor"))
+       mesh.checkCollisions = true
+      })
       const navMeshes = meshes.slice(1) as Mesh[];
       // this.navMeshManager = new NavMeshManager();
       // await this.navMeshManager.init();
       // setNavManager(this.navMeshManager);
       // this.navMeshManager.createNavMesh(navMeshes);
       // this.navMeshManager.createCrowd();
-      meshes.map((mesh) => {
-        mesh.checkCollisions = false;
-        mesh.isPickable = false;
-        mesh.freezeWorldMatrix();
-        mesh.material?.freeze();
-      });
+      // meshes.map((mesh) => {
+      //   mesh.checkCollisions = false;
+      //   mesh.isPickable = false;
+      //   mesh.freezeWorldMatrix();
+      //   mesh.material?.freeze();
+      // });
       this.engine.hideLoadingUI();
     }
 
