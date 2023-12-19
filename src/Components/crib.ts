@@ -7,6 +7,8 @@ import {
     Vector3,
     UniversalCamera,
     Mesh,
+    PointLight,
+    GlowLayer,
   } from "@babylonjs/core";
   import "@babylonjs/loaders";
  
@@ -98,18 +100,18 @@ import { CameraManager } from "./metaComponents/camera";
        if (mesh.name.startsWith("floor"))
        mesh.checkCollisions = true
       })
-      const navMeshes = meshes.slice(1) as Mesh[];
-      // this.navMeshManager = new NavMeshManager();
-      // await this.navMeshManager.init();
-      // setNavManager(this.navMeshManager);
-      // this.navMeshManager.createNavMesh(navMeshes);
-      // this.navMeshManager.createCrowd();
-      // meshes.map((mesh) => {
-      //   mesh.checkCollisions = false;
-      //   mesh.isPickable = false;
-      //   mesh.freezeWorldMatrix();
-      //   mesh.material?.freeze();
-      // });
+      const { meshes : stars } = await SceneLoader.ImportMeshAsync(
+        "",
+        "/models/",
+        `star.glb`,
+        this.scene
+      );
+      stars[0].position = new Vector3(42, 15,44.4)
+      const pointLight = new PointLight('starlight',new Vector3(42, 15,44.4),this.scene)
+      const gl = new GlowLayer("glow", this.scene);
+      gl.intensity = 0.5;
+      pointLight.intensity = 20
+   
       this.engine.hideLoadingUI();
     }
 
